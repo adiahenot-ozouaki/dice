@@ -1,0 +1,92 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg: #07140f;
+  --color-surface: #12291c;
+  --color-fg: #f4efe4;
+  --color-muted: #a9b8a6;
+  --color-gold: #d4b15a;
+  --color-ink: #1c140e;
+  --color-line: #274536;
+  --font-display: "Fraunces", "Iowan Old Style", Palatino, Georgia, serif;
+  --font-sans: "Outfit", "Avenir Next", "Segoe UI", sans-serif;
+}
+
+@layer base {
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+
+  html,
+  body {
+    height: 100%;
+    background: var(--color-bg);
+    color: var(--color-fg);
+  }
+
+  body {
+    margin: 0;
+    overflow: hidden;
+    font-family: var(--font-sans);
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-gold);
+    outline-offset: 3px;
+  }
+}
+
+.vignette {
+  background: radial-gradient(
+    ellipse 78% 64% at 50% 38%,
+    transparent 0%,
+    transparent 42%,
+    color-mix(in oklab, var(--color-bg) 40%, transparent) 68%,
+    var(--color-bg) 100%
+  );
+}
+
+.dock {
+  background: linear-gradient(
+    to top,
+    var(--color-bg) 18%,
+    color-mix(in oklab, var(--color-bg) 78%, transparent) 52%,
+    transparent 100%
+  );
+}
+
+.dock-pad {
+  padding-bottom: max(1.25rem, env(safe-area-inset-bottom));
+}
+
+.die-app {
+  touch-action: none;
+  user-select: none;
+}
+
+canvas {
+  touch-action: none;
+}
+
+@keyframes result-pop {
+  from {
+    opacity: 0.35;
+    transform: translateY(8px) scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.result-pop {
+  animation: result-pop 280ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .result-pop {
+    animation: none;
+  }
+}
